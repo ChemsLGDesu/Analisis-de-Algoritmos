@@ -43,22 +43,35 @@ Procedimiento:   T(M) = 1+N+1+(N+1)+N+1+N+1+1              T(M) = 1+(N+1)+N+4N²
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 3._
 
-int CalculateInteractionScore(int[] players)
+int CalculateInteractionScore(int[] players)           // players seria mi N
 {
-  int score = 0;
+  int score = 0;                                      // +1 (int)
 
-  for( int i = 0; i < players.Length; i++)
+  for( int i = 0; i < players.Length; i++)            // +1 (int) + (N+1 Comparaciones)+ N de incrementos
   {
-    for( int j = i + 1; j < players.Length; j++)
+    for( int j = i + 1; j < players.Length; j++)      // +1 (int) + (N+1 Comparaciones)+ N de incrementos
     {
-      int interaction = players[i] + players[j];
-      score += interaction;   
+      int interaction = players[i] + players[j];      // +1 (asignacion) + N + N (accede a la lista i y j de players)
+      score += interaction;                           // +2 (asignacion)
     }
   
   }
 
-  return score;
+  return score;                                      // +1 (score)
 }
+                       Interior del for                           Exterior del for
+Procedimiento:      T(M) = 1+N+1+N+1+N+1+N+2                  T(M) = 1+1+N+1+N+4N²+6N+1
+                    T(M) = 4N+6                               T(M) = 4N²+8N+4
+                    T(M) = N(4N+6)
+                    T(M) = 4N²+6N
+
+
+
+
+
+
+
+
 
 
 
