@@ -69,4 +69,99 @@ Procedimiento:      T(M) = 1+N+1+N+1+N+1+N+2                  T(M) = 1+1+N+1+N+4
 
 4._
 
-int Calculate
+int CalculateFinalDamage(int attack, int defense, float multiplier)   //
+{
+    int baseDamage = attack - defense;                                // +1 asignacion +1 disminución
+    int finalDamage = (int)(baseDamage * multiplier);                 // +1 asignacion +1 o.aritmetica
+ 
+    if(finalDamage < 0)                                               // +1 asignacion
+    {
+        finalDamage = 0;                                              // +1 asignación
+    }
+
+    return finalDamage;                                               // +1 
+}
+
+Procedimiento:       T(M) = 1+1+1+1+1+1+1
+                     T(M) = 7
+
+                     O(N) = 1
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5._ 
+
+bool CanCastSpell ( int mana, int cost)
+{
+    int remainingMana = mana - cost;                               // +1 asignacion y +1 o.aritmetica
+    if (remainingMana >= 0)                                        // +2 comparacion y asignación
+    {
+        Debug.Log("Spell casted");                                 // +1 llaamada simple
+        return true;                                               // +1 
+    }
+
+    return false;                                                  // +1
+}
+
+
+Procedimiento:       T(M) = 1+1+2+1+1+1
+                     T(M) = 7
+
+                     0(N) = 1
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+6._
+
+bool HasLowHealthPlayer (int[] healthValues)                        // healthValuesn seria la N
+{
+    for (int i=0; i < healthValues.Length; i++)                     // +1 asignación + (N+1 comparaciones) + N incrementos;
+    {
+        int health = heealthValues [i];                             // +1 asignación + N
+
+        if (health < 30)                                            // +1 comparacion
+        {
+            Debug.Log("Low health detected");                       // +1 llamada simple
+            return true;                                            // +1 
+        }
+    }
+    
+    return false;                                                   // +1
+}
+
+Procedimiento:        T(M) = 1+(N+1)+N+1+N+1+1+1+1
+                      T(M) = 3N+7
+
+                      O(N) = N
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+7._
+
+int CountStrongerPairs (int[] powerLevels)               // powerLevels seria la N
+{
+    int count = 0;                                       // +1 asignacion
+
+    for (int i= 0; i< powerLevels.Length; i++)           // +1 asignacion + (N+1 Comparaciones) + N incrementos
+    {
+        for (int j = 0; j < powerLevels.Length; j++)     // +1 asignacion + (N+1 Comparaciones) + N incrementos
+        {
+            if ( powerLevels[i] > powerLevels[j])        // +1 indice +1 Comparación +1 indice
+            {
+                count++;                                 // +1 por ejecucion -> +N por cada ejecucion completa del for interno
+            }
+
+        }
+
+    }
+    return count;                                        // +1
+}
+
+                        Interior del for                              Exterior del for
+Procedimiento:        T(M) = 1+(N+1)+N+1+1+1+1+N                  T(M) = 1+1+(N+1)+N+3N²+6N+1
+                      T(M) = 3N+6                                 T(M) = 3N²+ 8N + 4
+                      T(M) = N(3N+6)
+                      T(M) = 3N²+6N                               0(N) = N²
+
+
+                                    RPTA: T(M) = 3N²+ 8N + 4
+                                    0(N) = N²
